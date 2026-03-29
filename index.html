@@ -6,12 +6,12 @@
     <title>Doruk TV Yayın Kanalı</title>
     <style>
         :root {
-            --primary-color: #d32f2f; /* Doruk TV Kırmızısı */
-            --secondary-color: #00838f; /* Turkuaz tonu */
+            --primary-color: #d32f2f; 
+            --secondary-color: #00838f; 
             --bg-color: #f4f4f9;
             --text-color: #333;
-            --ai-color: #6a1b9a; /* Yapay Zeka için özel mor */
-            --canva-color: #00C4CC; /* Canva turkuazı */
+            --ai-color: #6a1b9a;
+            --ingattar-color: #00C4CC;
         }
 
         body {
@@ -26,7 +26,6 @@
             overflow-x: hidden;
         }
 
-        /* Header Section */
         .header-container {
             text-align: center;
             padding: clamp(40px, 6vw, 100px) 20px;
@@ -36,25 +35,24 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            align-items: center; /* Başlığı ve linkleri ortalar */
+            align-items: center;
         }
 
         h1 {
             margin: 0;
-            margin-bottom: clamp(25px, 4.5vw, 45px); /* Başlık altındaki boşluk */
+            margin-bottom: clamp(30px, 5vw, 50px);
             font-size: clamp(2.2rem, 5.5vw, 4.5rem);
             color: var(--primary-color);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        /* Sosyal Medya Butonları Konteyneri - Tam Ortalamak İçin */
         .social-links {
             display: flex;
-            flex-direction: column; /* Linkleri alt alta dizer */
-            align-items: center; /* Linkleri yatayda tam ortalar */
-            gap: 15px; /* Linkler arasındaki boşluk */
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
             width: 100%;
-            max-width: 400px; /* Butonların maksimum genişliği */
+            max-width: 420px;
             padding: 0 20px;
             box-sizing: border-box;
         }
@@ -62,34 +60,32 @@
         .social-links a {
             text-decoration: none;
             color: white;
-            padding: 15px 25px;
-            border-radius: 35px;
+            padding: 18px 25px;
+            border-radius: 40px;
             font-weight: bold;
             font-size: clamp(1rem, 1.8vw, 1.3rem);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%; /* Konteynerin tüm genişliğini kaplar */
+            width: 100%;
             box-sizing: border-box;
             text-align: center;
         }
 
         .social-links a:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             filter: brightness(1.1);
         }
 
-        /* Özel Renk Tanımlamaları */
         .btn-youtube { background-color: #FF0000; }
         .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .btn-capcut { background-color: #000000; }
-        .btn-ingattar { background-color: var(--canva-color); color: #fff; } /* Canva Sitesi */
-        .btn-ai { background-color: var(--ai-color); } /* Yapay Zeka */
+        .btn-ingattar { background-color: var(--ingattar-color); }
+        .btn-ai { background-color: var(--ai-color); }
 
-        /* Floating Chat Button */
         .chat-toggle-btn {
             position: fixed;
             bottom: clamp(20px, 4vw, 50px);
@@ -103,18 +99,9 @@
             font-size: clamp(24px, 2.5vw, 32px);
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             z-index: 1001;
         }
 
-        .chat-toggle-btn:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Chat Widget */
         .chat-widget {
             position: fixed;
             bottom: clamp(90px, 11vw, 140px);
@@ -124,56 +111,18 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-            overflow: hidden;
             display: none;
             flex-direction: column;
             z-index: 1000;
+            overflow: hidden;
         }
 
-        .chat-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-weight: bold;
-            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-        }
-
-        .chat-body {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        input[type="email"], textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-
-        .btn-submit {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
+        .chat-header { background-color: var(--primary-color); color: white; padding: 20px; text-align: center; font-weight: bold; }
+        .chat-body { padding: 25px; display: flex; flex-direction: column; gap: 15px; }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn-submit { background-color: var(--secondary-color); color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .hidden { display: none !important; }
-
-        .success-msg {
-            text-align: center;
-            color: #2e7d32;
-            font-weight: bold;
-            padding: 20px 0;
-        }
+        .success-msg { text-align: center; color: #2e7d32; font-weight: bold; padding: 10px; }
     </style>
 </head>
 <body>
@@ -185,8 +134,7 @@
             <a href="https://youtube.com/@doruktvyayinkanali?si=6ID-311UGoVKEu_z" target="_blank" class="btn-youtube">YouTube</a>
             <a href="https://www.instagram.com/doruk_tvyayinkanali?igsh=b2VrYzR1NzluODJh&utm_source=qr" target="_blank" class="btn-instagram">Instagram</a>
             <a href="https://mobile.capcutshare.com/sv2/ZSHdqaLUW/" target="_blank" class="btn-capcut">CapCut</a>
-            
-            <a href="https://canvasitesi.my.canva.site/ingattar" target="_blank" class="btn-ingattar">İngattar (Canva)</a>
+            <a href="https://canvasitesi.my.canva.site/ingattar" target="_blank" class="btn-ingattar">İngattar</a>
             <a href="https://www.icloud.com/shortcuts/f869f025757a413fbdc65e236e00d60c" target="_blank" class="btn-ai">🤖 Yapay Zeka Kestirmesi</a>
         </div>
     </header>
@@ -197,17 +145,15 @@
         <div class="chat-header">Bize Ulaşın</div>
         <div class="chat-body">
             <div id="step-email">
-                <input type="email" id="userEmail" placeholder="E-posta adresinizi giriniz..." required>
-                <button class="btn-submit" id="btnNext" style="margin-top: 12px; width: 100%;">Devam Et</button>
+                <input type="email" id="userEmail" placeholder="E-posta adresiniz..." required>
+                <button class="btn-submit" id="btnNext" style="margin-top: 10px; width: 100%;">Devam Et</button>
             </div>
-
             <div id="step-message" class="hidden">
-                <textarea id="userMessage" placeholder="Mesajınızı buraya yazın..." required></textarea>
-                <button class="btn-submit" id="btnSend" style="margin-top: 12px; width: 100%;">Gönder</button>
+                <textarea id="userMessage" placeholder="Mesajınız..." required></textarea>
+                <button class="btn-submit" id="btnSend" style="margin-top: 10px; width: 100%;">Gönder</button>
             </div>
-
             <div id="step-success" class="hidden success-msg">
-                Mesajınız gönderildi, müsait olduğumuz zaman sizin e-postanıza yanıtımızı göndereceğiz.
+                Mesajınız gönderildi, yakında dönüş yapacağız.
             </div>
         </div>
     </div>
@@ -217,65 +163,30 @@
         const chatWidget = document.getElementById('chatWidget');
         const btnNext = document.getElementById('btnNext');
         const btnSend = document.getElementById('btnSend');
-        
-        const stepEmail = document.getElementById('step-email');
-        const stepMessage = document.getElementById('step-message');
-        const stepSuccess = document.getElementById('step-success');
-        
         const emailInput = document.getElementById('userEmail');
         const messageInput = document.getElementById('userMessage');
 
-        let userEmailValue = '';
-
         chatToggleBtn.addEventListener('click', () => {
-            if (chatWidget.style.display === 'flex') {
-                chatWidget.style.display = 'none';
-                chatToggleBtn.innerText = '💬';
-            } else {
-                chatWidget.style.display = 'flex';
-                chatToggleBtn.innerText = '✕';
-            }
+            chatWidget.style.display = chatWidget.style.display === 'flex' ? 'none' : 'flex';
         });
 
         btnNext.addEventListener('click', () => {
-            if (emailInput.value.includes('@') && emailInput.value.includes('.')) {
-                userEmailValue = emailInput.value;
-                stepEmail.classList.add('hidden');
-                stepMessage.classList.remove('hidden');
-            } else {
-                alert('Lütfen geçerli bir e-posta adresi giriniz.');
+            if(emailInput.value.includes('@')) {
+                document.getElementById('step-email').classList.add('hidden');
+                document.getElementById('step-message').classList.remove('hidden');
             }
         });
 
         btnSend.addEventListener('click', () => {
-            const messageValue = messageInput.value.trim();
-            if (messageValue === '') { alert('Lütfen bir mesaj yazınız.'); return; }
-
             btnSend.innerText = "Gönderiliyor...";
-            btnSend.disabled = true;
-
             fetch('https://formspree.io/f/mzdkerqo', {
                 method: 'POST',
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "E-posta": userEmailValue, "Mesaj": messageValue })
-            }).then(response => {
-                if (response.ok) {
-                    stepMessage.classList.add('hidden');
-                    stepSuccess.classList.remove('hidden');
-                    setTimeout(() => {
-                        chatWidget.style.display = 'none';
-                        chatToggleBtn.innerText = '💬';
-                        // Formu sıfırla
-                        setTimeout(() => {
-                            stepSuccess.classList.add('hidden');
-                            stepEmail.classList.remove('hidden');
-                            emailInput.value = '';
-                            messageInput.value = '';
-                            btnSend.innerText = "Gönder";
-                            btnSend.disabled = false;
-                        }, 500);
-                    }, 4000);
-                }
+                body: JSON.stringify({ email: emailInput.value, message: messageInput.value })
+            }).then(() => {
+                document.getElementById('step-message').classList.add('hidden');
+                document.getElementById('step-success').classList.remove('hidden');
+                setTimeout(() => { chatWidget.style.display = 'none'; }, 3000);
             });
         });
     </script>
