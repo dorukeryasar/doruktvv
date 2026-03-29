@@ -6,10 +6,12 @@
     <title>Doruk TV Yayın Kanalı</title>
     <style>
         :root {
-            --primary-color: #d32f2f; /* Doruk TV Kırmızısı */
-            --secondary-color: #00838f; /* Turkuaz tonu */
+            --primary-color: #d32f2f; 
+            --secondary-color: #00838f; 
             --bg-color: #f4f4f9;
             --text-color: #333;
+            --ai-color: #6a1b9a; /* Yapay Zeka için özel mor */
+            --x-color: #000000; /* X/Twitter rengi */
         }
 
         body {
@@ -24,10 +26,9 @@
             overflow-x: hidden;
         }
 
-        /* Header Section - Logo silindi, sadece başlık ve linkler kaldı */
         .header-container {
             text-align: center;
-            padding: clamp(40px, 6vw, 100px) 20px; /* Logo silindiği için üst boşluğu biraz artırdım */
+            padding: clamp(40px, 6vw, 100px) 20px;
             background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
             width: 100%;
             box-sizing: border-box;
@@ -36,39 +37,47 @@
 
         h1 {
             margin: 0;
-            font-size: clamp(2.2rem, 5.5vw, 4.5rem); /* Başlığı biraz daha belirgin yaptım */
+            font-size: clamp(2.2rem, 5.5vw, 4.5rem);
             color: var(--primary-color);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        /* Social Media Links */
+        /* Sosyal Medya Butonları */
         .social-links {
-            margin-top: clamp(25px, 4.5vw, 45px); /* Başlık ve linkler arasındaki boşluk */
+            margin-top: clamp(25px, 4.5vw, 45px);
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+            max-width: 900px;
         }
 
         .social-links a {
             text-decoration: none;
             color: white;
-            padding: clamp(10px, 1.8vw, 18px) clamp(20px, 3.5vw, 35px);
-            border-radius: 30px;
+            padding: clamp(12px, 2vw, 20px) clamp(25px, 4vw, 40px);
+            border-radius: 35px;
             font-weight: bold;
             font-size: clamp(1rem, 1.8vw, 1.3rem);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .social-links a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            filter: brightness(1.1);
         }
 
+        /* Özel Renk Tanımlamaları */
         .btn-youtube { background-color: #FF0000; }
         .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .btn-capcut { background-color: #000000; }
+        .btn-ingattar-x { background-color: var(--x-color); }
+        .btn-ai { background-color: var(--ai-color); }
 
         /* Floating Chat Button */
         .chat-toggle-btn {
@@ -84,7 +93,7 @@
             font-size: clamp(24px, 2.5vw, 32px);
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,11 +101,10 @@
         }
 
         .chat-toggle-btn:hover {
-            background-color: #b71c1c;
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
 
-        /* Chat Widget Modal */
+        /* Chat Widget */
         .chat-widget {
             position: fixed;
             bottom: clamp(90px, 11vw, 140px);
@@ -110,19 +118,6 @@
             display: none;
             flex-direction: column;
             z-index: 1000;
-        }
-
-        /* TV & Big Screens */
-        @media (min-width: 1920px) {
-            .chat-widget {
-                width: 500px;
-                bottom: 150px;
-                right: 60px;
-            }
-            .chat-header { font-size: 1.6rem; padding: 30px; }
-            .chat-body { padding: 35px; }
-            input[type="email"], textarea { font-size: 1.3rem; padding: 18px; }
-            .btn-submit { font-size: 1.3rem; padding: 18px; }
         }
 
         .chat-header {
@@ -148,18 +143,6 @@
             border-radius: 10px;
             box-sizing: border-box;
             font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="email"]:focus, textarea:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-        }
-
-        textarea {
-            resize: none;
-            height: clamp(100px, 15vh, 180px);
         }
 
         .btn-submit {
@@ -171,23 +154,14 @@
             cursor: pointer;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: background-color 0.3s ease;
         }
 
-        .btn-submit:hover {
-            background-color: #006064;
-        }
-
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
 
         .success-msg {
             text-align: center;
             color: #2e7d32;
             font-weight: bold;
-            font-size: 1.1rem;
-            line-height: 1.6;
             padding: 20px 0;
         }
     </style>
@@ -201,6 +175,9 @@
             <a href="https://youtube.com/@doruktvyayinkanali?si=6ID-311UGoVKEu_z" target="_blank" class="btn-youtube">YouTube</a>
             <a href="https://www.instagram.com/doruk_tvyayinkanali?igsh=b2VrYzR1NzluODJh&utm_source=qr" target="_blank" class="btn-instagram">Instagram</a>
             <a href="https://mobile.capcutshare.com/sv2/ZSHdqaLUW/" target="_blank" class="btn-capcut">CapCut</a>
+            
+            <a href="https://tr.ee/W1H5JEXZ_W" target="_blank" class="btn-ingattar-x">İngattar X</a>
+            <a href="https://tr.ee/KA2kxfPWRi" target="_blank" class="btn-ai">🤖 Yapay Zeka Kestirmesi</a>
         </div>
     </header>
 
@@ -226,7 +203,6 @@
     </div>
 
     <script>
-        // DOM Elemanları
         const chatToggleBtn = document.getElementById('chatToggleBtn');
         const chatWidget = document.getElementById('chatWidget');
         const btnNext = document.getElementById('btnNext');
@@ -241,18 +217,16 @@
 
         let userEmailValue = '';
 
-        // Mesaj Kutusunu Aç/Kapat
         chatToggleBtn.addEventListener('click', () => {
             if (chatWidget.style.display === 'flex') {
                 chatWidget.style.display = 'none';
-                chatToggleBtn.innerText = '💬'; // Geri dön
+                chatToggleBtn.innerText = '💬';
             } else {
                 chatWidget.style.display = 'flex';
-                chatToggleBtn.innerText = '✕'; // Kapat işareti
+                chatToggleBtn.innerText = '✕';
             }
         });
 
-        // Adım 1'den Adım 2'ye Geçiş
         btnNext.addEventListener('click', () => {
             if (emailInput.value.includes('@') && emailInput.value.includes('.')) {
                 userEmailValue = emailInput.value;
@@ -263,60 +237,26 @@
             }
         });
 
-        // Adım 2: Formu Formspree'ye Gönder
         btnSend.addEventListener('click', () => {
             const messageValue = messageInput.value.trim();
-            if (messageValue === '') {
-                alert('Lütfen bir mesaj yazınız.');
-                return;
-            }
+            if (messageValue === '') { alert('Lütfen bir mesaj yazınız.'); return; }
 
-            // Butonu gönderiliyor durumuna al
             btnSend.innerText = "Gönderiliyor...";
             btnSend.disabled = true;
 
-            // Senin kodun buraya entegre edildi: mzdkerqo
-            const formspreeURL = 'https://formspree.io/f/mzdkerqo'; 
-
-            // E-posta gönderim işlemi (AJAX)
-            fetch(formspreeURL, {
+            fetch('https://formspree.io/f/mzdkerqo', {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "Gönderen E-posta": userEmailValue,
-                    "Mesaj": messageValue
-                })
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "E-posta": userEmailValue, "Mesaj": messageValue })
             }).then(response => {
-                // Başarılı olursa 3. adıma (başarı mesajı) geç
                 if (response.ok) {
                     stepMessage.classList.add('hidden');
                     stepSuccess.classList.remove('hidden');
-                    // Mesaj kutusunu 4 saniye sonra otomatik kapat
                     setTimeout(() => {
                         chatWidget.style.display = 'none';
                         chatToggleBtn.innerText = '💬';
-                        // Formu sıfırla (tekrar açıldığında baştan başlasın)
-                        setTimeout(() => {
-                            stepSuccess.classList.add('hidden');
-                            stepEmail.classList.remove('hidden');
-                            emailInput.value = '';
-                            messageInput.value = '';
-                            btnSend.innerText = "Gönder";
-                            btnSend.disabled = false;
-                        }, 500);
                     }, 4000);
-                } else {
-                    alert("Mesaj gönderilirken bir hata oluştu. Lütfen Formspree ayarlarını kontrol et.");
-                    btnSend.innerText = "Gönder";
-                    btnSend.disabled = false;
                 }
-            }).catch(error => {
-                alert("Mesaj gönderilirken bir ağ hatası oluştu.");
-                btnSend.innerText = "Gönder";
-                btnSend.disabled = false;
             });
         });
     </script>
