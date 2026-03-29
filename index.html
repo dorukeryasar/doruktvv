@@ -6,12 +6,12 @@
     <title>Doruk TV Yayın Kanalı</title>
     <style>
         :root {
-            --primary-color: #d32f2f; 
-            --secondary-color: #00838f; 
+            --primary-color: #d32f2f; /* Doruk TV Kırmızısı */
+            --secondary-color: #00838f; /* Turkuaz tonu */
             --bg-color: #f4f4f9;
             --text-color: #333;
             --ai-color: #6a1b9a; /* Yapay Zeka için özel mor */
-            --x-color: #000000; /* X/Twitter rengi */
+            --canva-color: #00C4CC; /* Canva turkuazı */
         }
 
         body {
@@ -26,6 +26,7 @@
             overflow-x: hidden;
         }
 
+        /* Header Section */
         .header-container {
             text-align: center;
             padding: clamp(40px, 6vw, 100px) 20px;
@@ -33,29 +34,35 @@
             width: 100%;
             box-sizing: border-box;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Başlığı ve linkleri ortalar */
         }
 
         h1 {
             margin: 0;
+            margin-bottom: clamp(25px, 4.5vw, 45px); /* Başlık altındaki boşluk */
             font-size: clamp(2.2rem, 5.5vw, 4.5rem);
             color: var(--primary-color);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        /* Sosyal Medya Butonları */
+        /* Sosyal Medya Butonları Konteyneri - Tam Ortalamak İçin */
         .social-links {
-            margin-top: clamp(25px, 4.5vw, 45px);
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            max-width: 900px;
+            flex-direction: column; /* Linkleri alt alta dizer */
+            align-items: center; /* Linkleri yatayda tam ortalar */
+            gap: 15px; /* Linkler arasındaki boşluk */
+            width: 100%;
+            max-width: 400px; /* Butonların maksimum genişliği */
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .social-links a {
             text-decoration: none;
             color: white;
-            padding: clamp(12px, 2vw, 20px) clamp(25px, 4vw, 40px);
+            padding: 15px 25px;
             border-radius: 35px;
             font-weight: bold;
             font-size: clamp(1rem, 1.8vw, 1.3rem);
@@ -64,6 +71,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 100%; /* Konteynerin tüm genişliğini kaplar */
+            box-sizing: border-box;
+            text-align: center;
         }
 
         .social-links a:hover {
@@ -76,8 +86,8 @@
         .btn-youtube { background-color: #FF0000; }
         .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .btn-capcut { background-color: #000000; }
-        .btn-ingattar-x { background-color: var(--x-color); }
-        .btn-ai { background-color: var(--ai-color); }
+        .btn-ingattar { background-color: var(--canva-color); color: #fff; } /* Canva Sitesi */
+        .btn-ai { background-color: var(--ai-color); } /* Yapay Zeka */
 
         /* Floating Chat Button */
         .chat-toggle-btn {
@@ -176,8 +186,8 @@
             <a href="https://www.instagram.com/doruk_tvyayinkanali?igsh=b2VrYzR1NzluODJh&utm_source=qr" target="_blank" class="btn-instagram">Instagram</a>
             <a href="https://mobile.capcutshare.com/sv2/ZSHdqaLUW/" target="_blank" class="btn-capcut">CapCut</a>
             
-            <a href="https://tr.ee/W1H5JEXZ_W" target="_blank" class="btn-ingattar-x">İngattar X</a>
-            <a href="https://tr.ee/KA2kxfPWRi" target="_blank" class="btn-ai">🤖 Yapay Zeka Kestirmesi</a>
+            <a href="https://canvasitesi.my.canva.site/ingattar" target="_blank" class="btn-ingattar">İngattar (Canva)</a>
+            <a href="https://www.icloud.com/shortcuts/f869f025757a413fbdc65e236e00d60c" target="_blank" class="btn-ai">🤖 Yapay Zeka Kestirmesi</a>
         </div>
     </header>
 
@@ -255,6 +265,15 @@
                     setTimeout(() => {
                         chatWidget.style.display = 'none';
                         chatToggleBtn.innerText = '💬';
+                        // Formu sıfırla
+                        setTimeout(() => {
+                            stepSuccess.classList.add('hidden');
+                            stepEmail.classList.remove('hidden');
+                            emailInput.value = '';
+                            messageInput.value = '';
+                            btnSend.innerText = "Gönder";
+                            btnSend.disabled = false;
+                        }, 500);
                     }, 4000);
                 }
             });
