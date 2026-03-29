@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doruk TV Yayın Kanalı</title>
+    <style>
+        :root {
+            --primary-color: #d32f2f; /* Doruk TV Kırmızısı */
+            --secondary-color: #00838f; /* Turkuaz tonu */
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Header Section - Logo silindi, sadece başlık ve linkler kaldı */
+        .header-container {
+            text-align: center;
+            padding: clamp(40px, 6vw, 100px) 20px; /* Logo silindiği için üst boşluğu biraz artırdım */
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 5.5vw, 4.5rem); /* Başlığı biraz daha belirgin yaptım */
+            color: var(--primary-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Social Media Links */
+        .social-links {
+            margin-top: clamp(25px, 4.5vw, 45px); /* Başlık ve linkler arasındaki boşluk */
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: white;
+            padding: clamp(10px, 1.8vw, 18px) clamp(20px, 3.5vw, 35px);
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn-youtube { background-color: #FF0000; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .btn-capcut { background-color: #000000; }
+
+        /* Floating Chat Button */
+        .chat-toggle-btn {
+            position: fixed;
+            bottom: clamp(20px, 4vw, 50px);
+            right: clamp(20px, 4vw, 50px);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: clamp(60px, 6vw, 80px);
+            height: clamp(60px, 6vw, 80px);
+            font-size: clamp(24px, 2.5vw, 32px);
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .chat-toggle-btn:hover {
+            background-color: #b71c1c;
+            transform: scale(1.1);
+        }
+
+        /* Chat Widget Modal */
+        .chat-widget {
+            position: fixed;
+            bottom: clamp(90px, 11vw, 140px);
+            right: clamp(20px, 4vw, 50px);
+            width: 350px;
+            max-width: calc(100vw - 40px);
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        /* TV & Big Screens */
+        @media (min-width: 1920px) {
+            .chat-widget {
+                width: 500px;
+                bottom: 150px;
+                right: 60px;
+            }
+            .chat-header { font-size: 1.6rem; padding: 30px; }
+            .chat-body { padding: 35px; }
+            input[type="email"], textarea { font-size: 1.3rem; padding: 18px; }
+            .btn-submit { font-size: 1.3rem; padding: 18px; }
+        }
+
+        .chat-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+        }
+
+        .chat-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        input[type="email"], textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="email"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        textarea {
+            resize: none;
+            height: clamp(100px, 15vh, 180px);
+        }
+
+        .btn-submit {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #006064;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .success-msg {
+            text-align: center;
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-container">
+        <h1>Doruk TV Yayın Kanalı</h1>
+        
+        <div class="social-links">
+            <a href="https://youtube.com/@doruktvyayinkanali?si=6ID-311UGoVKEu_z" target="_blank" class="btn-youtube">YouTube</a>
+            <a href="https://www.instagram.com/doruk_tvyayinkanali?igsh=b2VrYzR1NzluODJh&utm_source=qr" target="_blank" class="btn-instagram">Instagram</a>
+            <a href="https://mobile.capcutshare.com/sv2/ZSHdqaLUW/" target="_blank" class="btn-capcut">CapCut</a>
+        </div>
+    </header>
+
+    <button class="chat-toggle-btn" id="chatToggleBtn">💬</button>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">Bize Ulaşın</div>
+        <div class="chat-body">
+            <div id="step-email">
+                <input type="email" id="userEmail" placeholder="E-posta adresinizi giriniz..." required>
+                <button class="btn-submit" id="btnNext" style="margin-top: 12px; width: 100%;">Devam Et</button>
+            </div>
+
+            <div id="step-message" class="hidden">
+                <textarea id="userMessage" placeholder="Mesajınızı buraya yazın..." required></textarea>
+                <button class="btn-submit" id="btnSend" style="margin-top: 12px; width: 100%;">Gönder</button>
+            </div>
+
+            <div id="step-success" class="hidden success-msg">
+                Mesajınız gönderildi, müsait olduğumuz zaman sizin e-postanıza yanıtımızı göndereceğiz.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elemanları
+        const chatToggleBtn = document.getElementById('chatToggleBtn');
+        const chatWidget = document.getElementById('chatWidget');
+        const btnNext = document.getElementById('btnNext');
+        const btnSend = document.getElementById('btnSend');
+        
+        const stepEmail = document.getElementById('step-email');
+        const stepMessage = document.getElementById('step-message');
+        const stepSuccess = document.getElementById('step-success');
+        
+        const emailInput = document.getElementById('userEmail');
+        const messageInput = document.getElementById('userMessage');
+
+        let userEmailValue = '';
+
+        // Mesaj Kutusunu Aç/Kapat
+        chatToggleBtn.addEventListener('click', () => {
+            if (chatWidget.style.display === 'flex') {
+                chatWidget.style.display = 'none';
+                chatToggleBtn.innerText = '💬'; // Geri dön
+            } else {
+                chatWidget.style.display = 'flex';
+                chatToggleBtn.innerText = '✕'; // Kapat işareti
+            }
+        });
+
+        // Adım 1'den Adım 2'ye Geçiş
+        btnNext.addEventListener('click', () => {
+            if (emailInput.value.includes('@') && emailInput.value.includes('.')) {
+                userEmailValue = emailInput.value;
+                stepEmail.classList.add('hidden');
+                stepMessage.classList.remove('hidden');
+            } else {
+                alert('Lütfen geçerli bir e-posta adresi giriniz.');
+            }
+        });
+
+        // Adım 2: Formu Formspree'ye Gönder
+        btnSend.addEventListener('click', () => {
+            const messageValue = messageInput.value.trim();
+            if (messageValue === '') {
+                alert('Lütfen bir mesaj yazınız.');
+                return;
+            }
+
+            // Butonu gönderiliyor durumuna al
+            btnSend.innerText = "Gönderiliyor...";
+            btnSend.disabled = true;
+
+            // Senin kodun buraya entegre edildi: mzdkerqo
+            const formspreeURL = 'https://formspree.io/f/mzdkerqo'; 
+
+            // E-posta gönderim işlemi (AJAX)
+            fetch(formspreeURL, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "Gönderen E-posta": userEmailValue,
+                    "Mesaj": messageValue
+                })
+            }).then(response => {
+                // Başarılı olursa 3. adıma (başarı mesajı) geç
+                if (response.ok) {
+                    stepMessage.classList.add('hidden');
+                    stepSuccess.classList.remove('hidden');
+                    // Mesaj kutusunu 4 saniye sonra otomatik kapat
+                    setTimeout(() => {
+                        chatWidget.style.display = 'none';
+                        chatToggleBtn.innerText = '💬';
+                        // Formu sıfırla (tekrar açıldığında baştan başlasın)
+                        setTimeout(() => {
+                            stepSuccess.classList.add('hidden');
+                            stepEmail.classList.remove('hidden');
+                            emailInput.value = '';
+                            messageInput.value = '';
+                            btnSend.innerText = "Gönder";
+                            btnSend.disabled = false;
+                        }, 500);
+                    }, 4000);
+                } else {
+                    alert("Mesaj gönderilirken bir hata oluştu. Lütfen Formspree ayarlarını kontrol et.");
+                    btnSend.innerText = "Gönder";
+                    btnSend.disabled = false;
+                }
+            }).catch(error => {
+                alert("Mesaj gönderilirken bir ağ hatası oluştu.");
+                btnSend.innerText = "Gönder";
+                btnSend.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
